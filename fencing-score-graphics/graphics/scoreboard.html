@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap" rel="stylesheet">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+.bitcount-single-ink {
+  font-family: "Bitcount Prop Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+
+.round-container{
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    box-sizing: border-box;
+    border-radius: 25px 25px 0px 0px;
+    overflow: hidden;
+}
+
+.stacked-radial {
+  background:
+    radial-gradient(circle at 50% 100%, rgba(217, 34, 39, 0.5), transparent 150%),
+    /*radial-gradient(circle at 100% 90%, rgb(255 255 255 / 50%), transparent 20.71%),
+    radial-gradient(circle at 0% 90%, rgba(255, 255, 255, 0.5), transparent 20.71%)*/
+      white;}
+
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0px solid rgba(0, 0, 0, 0);
+    border-radius: 15px;
+    padding: 20px 40px; /* Even more padding */
+    box-shadow: 2 8px 32px rgba(0, 0, 0, 0.3);
+    width: 750px;
+    min-width: 800px;
+}
+
+.fencer {
+    flex: 1;
+    text-align: center;
+    min-width: 220px; /* More width for each player */
+}
+
+
+.fencer-score {
+    font-size: 60px;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding: 5px 5px 0px 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    min-width: 100px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.score-flash-left {
+    background: rgba(255, 0, 0, 0.9);
+}
+
+.score-flash-right {
+    background: rgba(0, 255, 0, 0.9);
+}
+
+img {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the image horizontally */
+    bottom: -185px; /* Adjust this value to position vertically */
+    overflow: hidden;
+    z-index: 2;
+}
+        
+    </style>
+</head>
+<body>
+    <div class="round-container bitcount-single-ink">
+        <div class="scoreboard stacked-radial">
+            <div class="fencer" id="FOTL">
+                <div class="fencer-score" id="FOTLScore">0</div>
+            </div>
+                <!-- Center Divider -->
+            <img src="badgerIcon.webp" alt="Badger Fencing Club">
+            <div class="fencer" id="FOTR">
+                <div class="fencer-score" id="FOTRScore">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scoresReplicant = nodecg.Replicant('score', 'fencing-score-dashboard');
+        
+        const FOTL_Score = document.getElementById('FOTLScore');
+        const FOTR_Score = document.getElementById('FOTRScore');
+
+        scoresReplicant.on('change', (newValue) => {
+            if (newValue) {
+                console.log(newValue.left);
+                console.log(newValue.right);
+                // Update FOTL
+                if (newValue.left !== null){
+                    FOTL_Score.textContent = newValue.left
+                    if (newValue.left !== 0){
+                        FOTL_Score.classList.add('score-flash-left');
+                        setTimeout(() => {
+                            FOTL_Score.classList.remove('score-flash-left');
+                        }, 500);
+
+                    }
+                };
+
+                // Update FOTR
+                if (newValue.right !== null){
+                    FOTR_Score.textContent = newValue.right
+                    if (newValue.right !== 0){
+                        FOTR_Score.classList.add('score-flash-right');
+                        setTimeout(() => {
+                            FOTR_Score.classList.remove('score-flash-right');
+                        }, 500);
+                    }
+
+                };
+                
+            }
+        }
+        );
+    </script>
+</body>
+</html>

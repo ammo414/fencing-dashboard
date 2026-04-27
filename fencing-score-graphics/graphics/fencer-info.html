@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Fencing Bar Graphic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background: transparent;
+        }
+
+        .signika-negative {
+            font-family: "Signika Negative", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        .fencing-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: rgba(255, 255, 255, 0);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: slideIn 0.8s ease-out 0.5s forwards;
+            z-index: 1;
+        }
+
+
+        img {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%); /* Centers the image horizontally */
+            bottom: -175px; /* Adjust this value to position vertically */
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .fencer-info {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            min-width: 400px;
+        }
+
+        .fencer-left {
+            align-items: flex-left;
+            text-align: left;
+            padding-left: 10px;
+        }
+
+        .fencer-container {
+            background-color: rgba(217, 34, 39);
+            padding: 10px 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .fencer-container-container {
+            background-color: rgba(255, 255, 255, 1);
+            border: 4px solid rgba(0, 0, 0, 1);
+            padding: 10px 10px;
+            border-radius: 20px;
+        }
+
+        .fencer-right {
+            align-items: flex-right;
+            text-align: right;
+            padding-right: 10px;
+
+        }
+
+        .fencer-name {
+            font-size: 32px;
+            font-weight: bold;
+            background: white;
+            margin-bottom: 4px;
+            text-transform: capitalize;
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out 1.2s forwards;
+        }
+
+        .fencer-pronouns {
+            font-size: 20px;
+            font-style: italic;
+            margin-bottom: 6px;
+            color: white;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out 1.4s forwards;
+        }
+
+        .fencer-club {
+            font-size: 20px;
+            font-weight: 500;
+            color: white;
+            opacity: 0;
+            animation: fadeInScale 0.6s ease-out 1.6s forwards;
+        }
+
+        .fencer-left .fencer-name {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fencer-right .fencer-name {
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hide bar when both fencers are empty */
+        .fencing-bar.hidden {
+            opacity: 0;
+            transform: translateY(100%);
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* Responsive adjustments for smaller content */
+        .fencer-info.empty {
+            opacity: 0.5;
+        }
+
+        .field-empty {
+            opacity: 0.3;
+        }
+
+
+        /* Mobile/smaller screen adjustments */
+        @media screen and (max-width: 1366px) {
+            .fencing-bar {
+                height: 100px;
+                padding: 0 30px;
+            }
+            
+            .fencer-name {
+                font-size: 28px;
+            }
+            
+            .fencer-pronouns {
+                font-size: 16px;
+            }
+            
+            .fencer-club {
+                font-size: 18px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="fencing-bar signika-negative" id="fencing-bar">
+        <!-- Left Fencer -->
+         <div class="fencer-container-container">
+            <div class="fencer-container">
+                <div class="fencer-info fencer-left" id="left-fencer">
+                    <div class="fencer-name" id="left-name">FENCER NAME</div>
+                    <div class="fencer-pronouns" id="left-pronouns">(pronouns)</div>
+                    <div class="fencer-club" id="left-club">Fencing Club</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Fencer -->
+        <div class="fencer-container-container">
+            <div class="fencer-container">
+                <div class="fencer-info fencer-right" id="right-fencer">
+                    <div class="fencer-name" id="right-name">FENCER NAME</div>
+                    <div class="fencer-pronouns" id="right-pronouns">(pronouns)</div>
+                    <div class="fencer-club" id="right-club">Fencing Club</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Get the fencers replicant
+        const fencersReplicant = nodecg.Replicant('fencers', 'fencing-score-dashboard');
+
+        // Get DOM elements
+        const fencingBar = document.getElementById('fencing-bar');
+        const leftFencer = document.getElementById('left-fencer');
+        const rightFencer = document.getElementById('right-fencer');
+
+        // Left fencer elements
+        const leftName = document.getElementById('left-name');
+        const leftPronouns = document.getElementById('left-pronouns');
+        const leftClub = document.getElementById('left-club');
+
+        // Right fencer elements
+        const rightName = document.getElementById('right-name');
+        const rightPronouns = document.getElementById('right-pronouns');
+        const rightClub = document.getElementById('right-club');
+
+        // Track if this is the first load
+        let isFirstLoad = true;
+        let refreshTimeout = null;
+
+        // Function to check if a string is empty or just whitespace
+        function isEmpty(str) {
+            return !str || str.trim().length === 0;
+        }
+
+        // Function to update a field and apply empty styling
+        function updateField(element, value, placeholder = '') {
+            if (isEmpty(value)) {
+                element.textContent = placeholder;
+                element.classList.add('field-empty');
+            } else {
+                element.textContent = value;
+                element.classList.remove('field-empty');
+            }
+        }
+
+        // Function to check if a fencer has any data
+        function hasFencerData(fencer) {
+            return !isEmpty(fencer.name) || !isEmpty(fencer.pronouns) || !isEmpty(fencer.club);
+        }
+
+        // Function to refresh the entire bar with fade effect
+        function refreshBar(updateCallback, duration = 600) {
+            // Clear any existing refresh timeout
+            if (refreshTimeout) {
+                clearTimeout(refreshTimeout);
+            }
+
+            // Remove existing animations and set up for refresh
+            fencingBar.style.animation = 'none';
+            fencingBar.style.transition = `opacity ${duration}ms ease-out`;
+            leftName.style.transition = 'fadeInScale 0.6s ease-out 1.2s forwards';
+            rightName.style.transition = 'fadeInScale 0.6s ease-out 1.2s forwards';
+            leftPronouns.style.transition = 'fadeInScale 0.6s ease-out 1.4s forwards';
+            rightPronouns.style.transition = 'fadeInScale 0.6s ease-out 1.4s forwards';
+            leftClub.style.transition = 'fadeInScale 0.6s ease-out 1.6s forwards';
+            rightClub.style.transition = 'fadeInScale 0.6s ease-out 1.6s forwards';
+            
+            // Fade out
+            fencingBar.style.opacity = '0';
+            //fencingBar.style.transform = 'translateY(20px)';
+
+            refreshTimeout = setTimeout(() => {
+                // Update content while invisible
+                if (updateCallback) {
+                    updateCallback();
+                }
+
+                // Small delay before fading back in
+                setTimeout(() => {
+                    fencingBar.style.opacity = '1';
+                    fencingBar.style.transform = 'translateY(0)';
+                    
+                    // Reset animation after fade completes
+                    // setTimeout(() => {
+                    //     fencingBar.style.animation = '';
+                    //    fencingBar.style.transition = '';
+                    // }, duration / 2);
+                }, 50);
+            }, duration);
+        }
+
+        // Function to check if fencer data has actually changed
+        function hasDataChanged(newData, oldData) {
+            if (!oldData || !newData) return true;
+            
+            return (
+                newData.left?.name !== oldData.left?.name ||
+                newData.left?.pronouns !== oldData.left?.pronouns ||
+                newData.left?.club !== oldData.left?.club ||
+                newData.right?.name !== oldData.right?.name ||
+                newData.right?.pronouns !== oldData.right?.pronouns ||
+                newData.right?.club !== oldData.right?.club
+            );
+        }
+
+        // Function to update all fencer display content
+        function updateAllContent(data) {
+            if (!data) return;
+
+
+            // Update left fencer
+            updateField(leftName, data.left?.name.substring(0, 27), 'FENCER NAME');
+            updateField(leftPronouns, data.left?.pronouns.substring(0, 27), '(pronouns)');
+            updateField(leftClub, data.left?.club.substring(0, 27), 'Fencing Club');
+
+            // Update right fencer
+            updateField(rightName, data.right?.name.substring(0, 27), 'FENCER NAME');
+            updateField(rightPronouns, data.right?.pronouns.substring(0, 27), '(pronouns)');
+            updateField(rightClub, data.right?.club.substring(0, 27), 'Fencing Club');
+
+            // Check if we should show or hide the bar
+            const hasLeftData = hasFencerData(data.left || {});
+            const hasRightData = hasFencerData(data.right || {});
+            const hasAnyData = hasLeftData || hasRightData;
+
+            // Apply empty styling to fencer containers
+            if (!hasLeftData) {
+                leftFencer.classList.add('empty');
+            } else {
+                leftFencer.classList.remove('empty');
+            }
+
+            if (!hasRightData) {
+                rightFencer.classList.add('empty');
+            } else {
+                rightFencer.classList.remove('empty');
+            }
+
+            // Show or hide the entire bar
+            if (!hasAnyData) {
+                setTimeout(() => {
+                    fencingBar.classList.add('hidden');
+                }, 300);
+            } else {
+                fencingBar.classList.remove('hidden');
+            }
+        }
+
+        // Function to update fencer display with refresh effect
+        function updateFencerDisplay(data, forceRefresh = false) {
+            if (!data) return;
+
+            // If this is the first load, update immediately without refresh effect
+            if (isFirstLoad) {
+                updateAllContent(data);
+                isFirstLoad = false;
+                return;
+            }
+
+            // If we want to force refresh or this is a data update, use refresh effect
+            if (forceRefresh) {
+                console.log('Refreshing entire bar with new fencer data');
+                refreshBar(() => {
+                    updateAllContent(data);
+                });
+            } else {
+                // Silent update (no refresh effect)
+                updateAllContent(data);
+            }
+        }
+
+        // Listen for changes to the fencers replicant
+        fencersReplicant.on('change', (newValue, oldValue) => {
+            // Check if data actually changed
+            const dataChanged = hasDataChanged(newValue, oldValue);
+            
+            if (dataChanged && !isFirstLoad) {
+                console.log('Fencer data changed, triggering full bar refresh');
+                // Always refresh the entire bar when data changes
+                updateFencerDisplay(newValue, true); // true = force refresh
+            } else if (isFirstLoad) {
+                // First load - no refresh effect
+                updateFencerDisplay(newValue, false);
+            }
+        });
+
+        // Initialize with default empty state if no data exists
+        fencersReplicant.on('declared', () => {
+            console.log('Fencers replicant declared');
+            if (!fencersReplicant.value) {
+                updateFencerDisplay({
+                    left: { name: '', pronouns: '', club: '' },
+                    right: { name: '', pronouns: '', club: '' }
+                }, false); // No refresh on initial empty state
+            }
+        });
+
+
+        // Optional: Handle window resize for responsive design
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const scale = Math.min(width / 1920, height / 1080);
+            
+            if (scale < 1) {
+                fencingBar.style.transform = `scale(${scale})`;
+                fencingBar.style.transformOrigin = 'bottom center';
+            } else {
+                fencingBar.style.transform = 'none';
+            }
+        });
+
+        console.log('Fencing bar graphic loaded and ready');
+    </script>
+</body>
+</html>

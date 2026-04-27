@@ -1,0 +1,25 @@
+{
+  "name": "fencing-score-graphics",
+  "version": "1.0.0",
+  "description": "Fencing match scoreboard for NodeCG",
+  "nodecg": {
+    "compatibleRange": "^2.0.0",
+    "graphics": [
+      {
+        "file": "fencer-info.html",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "file": "scoreboard.html",
+        "width": 800,
+        "height": 200
+      },
+      {
+        "file": "which-event.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "fencing-score-dashboard",
+  "version": "1.0.0",
+  "description": "Fencing match scoreboard for NodeCG",
+  "nodecg": {
+    "compatibleRange": "^2.0.0",
+    "dashboardPanels": [
+      {
+        "name": "fencer-info",
+        "title": "Fencer Information",
+        "width": 6,
+        "file": "fencer-info.html",
+        "workspace": "Fencing"
+      },
+      {
+        "name": "scoreboard",
+        "title": "Score Control",
+        "width": 4,
+        "file": "scoreboard.html",
+        "workspace": "Fencing"
+      },
+      {
+        "name": "which-event",
+        "title": "Which Event",
+        "width": 4,
+        "file": "which-event.html",
+        "workspace": "Events"
+      }
+    ]
+  }
+}

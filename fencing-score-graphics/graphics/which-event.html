@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Which Event</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap" rel="stylesheet">
+<style>
+
+    
+    body {
+        box-sizing: content-box;
+        text-transform: lowercase;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.85);
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        top: -80px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+
+    .unbounded {
+        font-family: "Unbounded", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+    }
+
+    .event-bar {
+        position: absolute;
+        top: -10px;
+        background: transparent;
+        scale: 1.5;
+        min-width: 150px;
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+        border-radius: 8px;
+
+    }
+
+    .event-bar.transparent {
+        opacity: 0;
+    }
+    
+    .event-container-container {
+        background-color: rgba(255, 255, 255, 1);
+        border: 3px solid rgba(0, 0, 0, 1);
+        padding: 7px 7px;
+        height: 65px;
+        border-radius: 20px;
+    }
+
+    .event-container {
+        background-color: rgba(217, 34, 39);
+        height: 65px;
+        text-transform: lowercase;
+        letter-spacing: 1px;
+        border-radius: 12px;
+    }
+
+    .event-header {
+        padding-top: 12px;
+        font-size: 16px;
+        margin-top: 0px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .event-subheader {
+        font-size: 16px;
+        margin-top: 4px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+</style>
+</head>
+<body>
+    <div class="event-bar transparent unbounded" id="event-bar">
+        <div class="event-container-container">
+            <div class="event-container">
+                <div class="event-header" id="header">header</div>
+                <div class="event-subheader" id="subheader">subheader</div>
+            </div>
+        </div>
+    </div>
+<script>
+    const eventReplicant = nodecg.Replicant('event', 'fencing-score-dashboard');
+    
+    const header = document.getElementById('header');
+    const subheader = document.getElementById('subheader');
+    const event_bar = document.getElementById('event-bar')
+
+    function isEmpty(str) {
+        return !str || str.trim().length === 0;
+    }
+
+    function updateField(element, value, placeholder='') {
+        if (isEmpty(value)) {
+            element.textContent = placeholder;
+        } else {
+            element.textContent = value;
+        }
+    }
+    function updateAllContent(data) {
+        if (!data) return;
+
+        if (isEmpty(data.header) && isEmpty(data.subheader)) {
+            event_bar.classList.add('transparent');
+            setTimeout(() => {
+                updateField(header, data.header);
+                updateField(subheader, data.subheader);                  
+            }, 600)
+
+        } else {
+            event_bar.classList.remove('transparent');
+            updateField(header, data.header);
+            updateField(subheader, data.subheader);                  
+        }
+    };
+
+    eventReplicant.on('change', (newValue) => {
+        updateAllContent(newValue);
+    });
+
+</script>
+</body>
+</html>
