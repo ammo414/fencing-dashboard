@@ -1,6 +1,6 @@
 # Fencing Dashboard
 
-[NodeCG bundles](https://github.com/nodecg/nodecg) to create a dashboard and graphics to use for a fencing tournament. Feel free to modify and use as you see fit.
+[NodeCG](https://github.com/nodecg/nodecg) bundles to create a dashboard and graphics to use for a fencing tournament. Feel free to modify and use as you see fit.
 
 ## Installation
 [NodeCG's installation guide](https://www.nodecg.dev/docs/installing)
